@@ -1,7 +1,7 @@
 {
     "name": "ithilbert/dev-tools",
     "type": "metapackage",
-    "description": "Gemeinsame Entwicklerwerkzeuge für Laravel-Projekte der IT-Hilbert GmbH (nur als Dev-Abhängigkeit installieren)",
+    "description": "Gemeinsame Entwicklerwerkzeuge für Laravel-13-Projekte der IT-Hilbert GmbH (nur als Dev-Abhängigkeit installieren)",
     "keywords": ["laravel", "it-hilbert", "dev", "boost"],
     "license": "MIT",
     "authors": [
@@ -14,14 +14,20 @@
     "homepage": "https://www.it-hilbert.com",
     "minimum-stability": "stable",
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "barryvdh/laravel-debugbar": "^4.1",
+        "brianium/paratest": "^7.19",
         "fakerphp/faker": "^1.23",
         "larastan/larastan": "^3.13",
-        "laravel/boost": "^2.4",
-        "laravel/pail": "^1.2.2",
-        "laravel/pint": "^1.24",
+        "laravel/boost": "^2.10",
+        "laravel/pail": "^1.2.5",
+        "laravel/pao": "^1.0.6",
+        "laravel/pint": "^1.27",
         "mockery/mockery": "^1.6",
-        "nunomaduro/collision": "^8.6"
+        "nunomaduro/collision": "^8.6",
+        "phpunit/phpunit": "^12.5.14"
+    },
+    "conflict": {
+        "laravel/framework": "<13.0"
     }
 }
