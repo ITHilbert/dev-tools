@@ -50,6 +50,14 @@ Das Paket wird über Versions-Tags (`1.0.0`, `1.1.0` …) eingebunden, nicht üb
 
 PHPUnit 12 (ab 12.5.14) und PHPUnit 13 sind zugelassen. Welche Version installiert wird, legt das Projekt selbst fest, z. B. mit `"phpunit/phpunit": "^13.4"` in `require-dev`. paratest wird passend dazu aufgelöst.
 
+### paratest höchstens 7.26.0 (wegen laravel/pao)
+
+`brianium/paratest` ab 7.26.1 ist per `conflict` ausgeschlossen. *Warum:* laravel/pao (bis 1.1.5) baut `WrapperRunner::run()` von paratest nach und kennt das in 7.26.1 eingeführte `runTmpDir` nicht. In Agent-Sessions bricht dann jeder Parallellauf mit „Typed property … `$runTmpDir` must not be accessed before initialization“ ab (Task #834). pao steckt auch im Laravel-13-Skeleton, deshalb wird paratest begrenzt und nicht pao entfernt.
+
+- PHPUnit 13 läuft damit mit paratest 7.26.0, also PHPUnit 13.4.x. PHPUnit 12 ist nicht betroffen (paratest 7.20).
+- Nachteil: Der Sicherheitsfix aus paratest 7.26.1 fehlt (Worker-Dateien in einem privaten Ordner je Lauf). Er betrifft nur Rechner, auf denen mehrere Benutzer arbeiten. dev-tools läuft nur auf Entwicklerrechnern.
+- Aufheben, sobald eine laravel/pao-Version `runTmpDir` unterstützt: `conflict` hier entfernen, pao-Untergrenze auf diese Version setzen, neuer Tag.
+
 ## Aktualisieren
 
 - Werkzeug ergänzen oder Version anheben: hier in `composer.json` ändern, nach `main` pushen und einen neuen Tag setzen (neues Werkzeug: Minor, angehobene Version: Patch).
