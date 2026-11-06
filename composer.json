@@ -28,6 +28,7 @@
         "phpunit/phpunit": "^12.5.14 || ^13.0"
     },
     "conflict": {
-        "laravel/framework": "<13.0"
+        "laravel/framework": "<13.0",
+        "brianium/paratest": ">=7.26.1"
     }
 }
