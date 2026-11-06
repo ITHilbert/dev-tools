@@ -17,7 +17,7 @@ Sammelpaket (Composer-Metapackage) mit den gemeinsamen Entwicklerwerkzeugen alle
 | nunomaduro/collision | Fehlerausgabe in der Konsole |
 | mockery/mockery | Mocks für Tests |
 | fakerphp/faker | Testdaten für Factories |
-| phpunit/phpunit | Testframework (PHPUnit 12) |
+| phpunit/phpunit | Testframework (PHPUnit 12 oder 13) |
 | brianium/paratest | Parallele Tests (`php artisan test --parallel`) |
 
 Nicht enthalten: `laravel/sail`. Bei Bedarf im Projekt selbst einbinden.
@@ -27,7 +27,7 @@ Nicht enthalten: `laravel/sail`. Bei Bedarf im Projekt selbst einbinden.
 **Nur als Dev-Abhängigkeit installieren.** Sonst landen die Werkzeuge auf dem Produktivserver.
 
 ```bash
-composer require ithilbert/dev-tools:dev-main --dev
+composer require --dev ithilbert/dev-tools:^1.0
 ```
 
 Wenn die Pakete vorher einzeln in `require-dev` stehen, dort entfernen.
@@ -44,11 +44,15 @@ php artisan boost:install
 
 Bei der Auswahl nur den **MCP-Server** aktivieren, **keine** Guidelines und **keine** Skills. Die Auswahl steht danach in `boost.json` und gilt auch für `boost:update`.
 
+## Versionen und PHPUnit
+
+Das Paket wird über Versions-Tags (`1.0.0`, `1.1.0` …) eingebunden, nicht über `dev-main`. *Warum:* Projekte mit `minimum-stability: stable` können `dev-main` nur mit `@dev` einbinden (excel-programmierer.com, Task #716).
+
+PHPUnit 12 (ab 12.5.14) und PHPUnit 13 sind zugelassen. Welche Version installiert wird, legt das Projekt selbst fest, z. B. mit `"phpunit/phpunit": "^13.4"` in `require-dev`. paratest wird passend dazu aufgelöst.
+
 ## Aktualisieren
 
-Es gibt keine Tags. Projekte binden `dev-main` ein, wie die übrigen `ithilbert/*`-Pakete.
-
-- Werkzeug ergänzen oder Version anheben: hier in `composer.json` ändern und nach `main` pushen.
+- Werkzeug ergänzen oder Version anheben: hier in `composer.json` ändern, nach `main` pushen und einen neuen Tag setzen (neues Werkzeug: Minor, angehobene Version: Patch).
 - In den Projekten: `composer update ithilbert/dev-tools --with-all-dependencies`.
 
 ## Lizenz
